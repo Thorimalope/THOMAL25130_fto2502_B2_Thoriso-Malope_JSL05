@@ -71,12 +71,13 @@ newTaskBtn.addEventListener("click", function () {
     const newTitleInput = document.getElementById("new-title-input").value;
     const newDescriptionInput = document.getElementById("new-description-input").value;
     const newSelectedStatus = document.getElementById("new-select").value;
+ 
 
   const newTask = {
     id: Date.now(),
-    title,
-    description,
-    status
+    title: newTitleInput,
+    description: newDescriptionInput,
+    status: newSelectedStatus
   };
 
   saveToLocalStorage(newTask);
@@ -102,7 +103,7 @@ function addTaskToBoard(task) {
   card.classList.add("card");
   card.setAttribute("data-id", task.id);
   card.innerHTML = `
-    <h4>${task.title}</h4>
+    <p>${task.title}</p>
   `;
 
   column.appendChild(card);
@@ -110,11 +111,20 @@ function addTaskToBoard(task) {
 }
 
 function closeAndResetModal() {
-  const modal = document.querySelector(".modal-wrapper");
 
-  modal.style.display = "none";
-  document.getElementById("title-input").value = "";
-  document.getElementById("description-input").value = "";
-  document.getElementById("status-select").value = "todo";
+  const addTaskModal = document.querySelector(".newTask-modal-wrapper");
+  addTaskModal.style.display = "none";
+  document.getElementById("new-title-input").value = "";
+  document.getElementById("new-description-input").value = "";
+  document.getElementById("new-select").value = "todo";
 }
+
+
+// Methods that might work
+
+/*function saveToLocalStorage(task) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}*/
 
