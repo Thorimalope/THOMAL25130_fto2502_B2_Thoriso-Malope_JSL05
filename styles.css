@@ -318,6 +318,22 @@ body{
     background-color: #828fa3;
 }
 
+#new-task-btn{
+    width: 424px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    background-color: #635fc7;
+    margin-top: 40px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#new-task-btn:hover{
+    background-color: #828fa3;
+}
+
 /* Media Queries */
 
 @media (max-width: 768px) {
