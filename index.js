@@ -80,6 +80,7 @@ newTaskBtn.addEventListener("click", function () {
   };
 
   saveToLocalStorage(newTask);
+  retrieveFromLocalStorage(newTask);
   addTaskToBoard(newTask);
   closeAndResetModal();
 });
@@ -88,3 +89,32 @@ function saveToLocalStorage(task) {
   let savedTask = JSON.stringify(task);
   localStorage.setItem("task", savedTask);
 }
+
+function retrieveFromLocalStorage(task) {
+  let retrievedTask = localStorage.getItem("task");
+  let retrievedObject = JSON.parse(retrievedTask);
+}
+
+function addTaskToBoard(task) {
+  const column = document.getElementById(`${task.status}-column`);
+
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.setAttribute("data-id", task.id);
+  card.innerHTML = `
+    <h4>${task.title}</h4>
+  `;
+
+  column.appendChild(card);
+
+}
+
+function closeAndResetModal() {
+  const modal = document.querySelector(".modal-wrapper");
+
+  modal.style.display = "none";
+  document.getElementById("title-input").value = "";
+  document.getElementById("description-input").value = "";
+  document.getElementById("status-select").value = "todo";
+}
+
