@@ -83,3 +83,8 @@ newTaskBtn.addEventListener("click", function () {
   addTaskToBoard(newTask);
   closeAndResetModal();
 });
+
+function saveToLocalStorage(task) {
+  let savedTask = JSON.stringify(task);
+  localStorage.setItem("task", savedTask);
+}
