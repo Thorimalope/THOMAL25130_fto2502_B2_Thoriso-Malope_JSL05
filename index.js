@@ -36,12 +36,12 @@ closeButton.addEventListener("click", function () {
   modal.style.display = "none";
 })
 
+
+
 // Add Task Modal Elements
 
 const addTaskModal = document.querySelector(".newTask-modal-wrapper");
-const newTitleInput = document.getElementById("new-title-input");
-const newDescriptionInput = document.getElementById("new-description-input");
-const newSelectedStatus = document.querySelector(".add-selected");
+
 
 // close button for new task modal
 
@@ -53,15 +53,6 @@ newCloseButton.addEventListener("click", function () {
 
 
 
-// Dropdown
-
-/*const statusSelect = document.getElementById("select");
-const dropdownMenu = document.getElementById("menu");
-
-statusSelect.addEventListener("click", function () {
-  dropdownMenu.style.display = "block";
-})*/
-
 // Create new task button
 
 const addNewTaskButton = document.getElementById("create-task-btn");
@@ -70,3 +61,25 @@ addNewTaskButton.addEventListener("click", function () {
     addTaskModal.style.display = "flex";
     console.log("Create new task?");
 })
+
+// Functions to save the new task and add it to the board
+
+const newTaskBtn = document.getElementById("new-task-btn");
+
+newTaskBtn.addEventListener("click", function () {
+
+    const newTitleInput = document.getElementById("new-title-input").value;
+    const newDescriptionInput = document.getElementById("new-description-input").value;
+    const newSelectedStatus = document.getElementById("new-select").value;
+
+  const newTask = {
+    id: Date.now(),
+    title,
+    description,
+    status
+  };
+
+  saveToLocalStorage(newTask);
+  addTaskToBoard(newTask);
+  closeAndResetModal();
+});
