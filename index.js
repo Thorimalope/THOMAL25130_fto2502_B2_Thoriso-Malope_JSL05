@@ -81,20 +81,31 @@ newTaskBtn.addEventListener("click", function () {
   };
 
   saveToLocalStorage(newTask);
-  retrieveFromLocalStorage(newTask);
   addTaskToBoard(newTask);
   closeAndResetModal();
 });
+
+
+/*function saveToLocalStorage(task) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}*/
 
 function saveToLocalStorage(task) {
   let savedTask = JSON.stringify(task);
   localStorage.setItem("task", savedTask);
 }
 
-function retrieveFromLocalStorage(task) {
-  let retrievedTask = localStorage.getItem("task");
-  let retrievedObject = JSON.parse(retrievedTask);
+function loadTaskFromLocalStorage() {
+  const saved = localStorage.getItem("task");
+  if (saved) {
+    const task = JSON.parse(saved);
+    addTaskToBoard(task); 
+  }
 }
+
+
 
 function addTaskToBoard(task) {
   const column = document.getElementById(`${task.status}-column`);
@@ -120,11 +131,37 @@ function closeAndResetModal() {
 }
 
 
+
+
+
+
 // Methods that might work
 
 /*function saveToLocalStorage(task) {
+  let savedTask = JSON.stringify(task);
+  localStorage.setItem("task", savedTask);
+}
+
+function retrieveFromLocalStorage(task) {
+  let retrievedTask = JSON.parse(localStorage.getItem("task"));
+  retrievedTask.forEach(task => addTaskToBoard(task));
+}
+
+function saveToLocalStorage(task) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadTasksFromStorage();
+});
+
+/*function loadTasksFromStorage() {
+  const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  savedTasks.forEach(task => addTaskToBoard(task));
 }*/
 
+document.addEventListener("DOMContentLoaded", () => {
+  loadTaskFromLocalStorage();
+});
